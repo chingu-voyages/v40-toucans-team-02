@@ -20,22 +20,15 @@ const libraries = ["places"];
 const MapComponent = () => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "ENTER API KEY HERE",
+    googleMapsApiKey: "AIzaSyAx7PGtZydPCpD6wiCX36JdjUf6-5owhRA",
     libraries: libraries,
   });
-
-  const [map, setMap] = React.useState(null);
-
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null);
-  }, []);
 
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
       zoom={10}
-      onUnmount={onUnmount}
     >
       <Autocomplete>
         <input

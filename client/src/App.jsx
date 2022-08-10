@@ -1,10 +1,4 @@
 import React from "react";
-import {
-  GoogleMap,
-  useJsApiLoader,
-  Marker,
-  Autocomplete,
-} from "@react-google-maps/api";
 
 import MapComponent from "./components/MapComponent";
 
