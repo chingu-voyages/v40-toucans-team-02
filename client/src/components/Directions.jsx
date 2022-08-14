@@ -15,6 +15,7 @@ class Directions extends Component {
       travelMode: "DRIVING",
       origin: "",
       destination: "",
+      savedRoutes: [],
     };
 
     this.directionsCallback = this.directionsCallback.bind(this);
@@ -25,6 +26,7 @@ class Directions extends Component {
     this.getOrigin = this.getOrigin.bind(this);
     this.getDestination = this.getDestination.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.onSaveClick = this.onSaveClick.bind(this);
   }
 
   directionsCallback(response) {
@@ -84,6 +86,17 @@ class Directions extends Component {
         origin: this.origin.value,
         destination: this.destination.value,
       }));
+    }
+  }
+
+  onSaveClick() {
+    // console.log(this);
+    if (this.state.response !== null) {
+      // console.log("not null");
+      this.setState(() => {
+        console.log("setState");
+        return this.state.savedRoutes.push(this.state.response);
+      });
     }
   }
 
@@ -189,6 +202,13 @@ class Directions extends Component {
             onClick={this.onClick}
           >
             Build Route
+          </button>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={this.onSaveClick}
+          >
+            Save Route
           </button>
         </div>
 
