@@ -4,7 +4,7 @@ import LandingPage from "./components/LandingPage";
 // import LandingPage from "./components/LandingPage";
 
 import MapComponent from "./components/MapComponent";
-import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
 
 function App() {
   const padding = {
@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MapComponent />} />
         <Route path="/landing" element={<LandingPage />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </Router>
   );
