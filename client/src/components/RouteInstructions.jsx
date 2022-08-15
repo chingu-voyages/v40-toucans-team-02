@@ -1,10 +1,26 @@
 import React from "react";
 
 const RouteInstructions = ({ routeData }) => {
+  if (!routeData) {
+    return <div>Loading...</div>;
+  }
+  const routeStartAddress = routeData.legs[0].start_address;
+  const routeEndAddress = routeData.legs[0].end_address;
+  const routeDistance = routeData.legs[0].distance.text;
+  const routeDuration = routeData.legs[0].duration.text;
   const routeSteps = routeData.legs[0].steps;
+
   return (
     <div>
-      <h2>Route Instructions</h2>
+      <div>
+        <h2>Route Instructions</h2>
+        <h3>Route Overview</h3>
+        <div>Start Address: {routeStartAddress}</div>
+        <div>End Address: {routeEndAddress}</div>
+        <div>Distance: {routeDistance}</div>
+        <div>Duration: {routeDuration}</div>
+      </div>
+      <br></br>
       <table>
         <thead>
           <tr>
