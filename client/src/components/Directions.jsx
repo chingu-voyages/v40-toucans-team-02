@@ -5,6 +5,7 @@ import {
   DirectionsRenderer,
   Autocomplete,
 } from "@react-google-maps/api";
+import RouteInstructions from "./RouteInstructions";
 
 class Directions extends Component {
   constructor(props) {
@@ -13,8 +14,11 @@ class Directions extends Component {
     this.state = {
       response: null,
       travelMode: "DRIVING",
-      origin: "",
-      destination: "",
+      origin: "32 Corbett Ave, York, ON M6N 1V1",
+      destination: "269 Conley St, Vaughan, ON L4J 2Z2",
+      routeData: null,
+      routeSteps: [],
+      savedRoutes: [],
     };
 
     this.directionsCallback = this.directionsCallback.bind(this);
@@ -25,14 +29,17 @@ class Directions extends Component {
     this.getOrigin = this.getOrigin.bind(this);
     this.getDestination = this.getDestination.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.onSaveClick = this.onSaveClick.bind(this);
   }
 
   directionsCallback(response) {
     if (response !== null) {
       if (response.status === "OK") {
+        console.log(response);
+        const routeData = response.routes[0];
         this.setState(() => ({
           response,
-          // added resets to break endless api call loop
+          routeData: routeData,
           origin: "",
           destination: "",
         }));
@@ -84,6 +91,17 @@ class Directions extends Component {
         origin: this.origin.value,
         destination: this.destination.value,
       }));
+    }
+  }
+
+  onSaveClick() {
+    // console.log(this);
+    if (this.state.response !== null) {
+      // console.log("not null");
+      this.setState(() => {
+        console.log("setState");
+        return this.state.savedRoutes.push(this.state.response);
+      });
     }
   }
 
@@ -190,6 +208,13 @@ class Directions extends Component {
           >
             Build Route
           </button>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={this.onSaveClick}
+          >
+            Save Route
+          </button>
         </div>
 
         <div className="map-container">
@@ -224,6 +249,7 @@ class Directions extends Component {
               />
             )}
           </GoogleMap>
+          <RouteInstructions routeData={this.state.routeData} />
         </div>
       </div>
     );
