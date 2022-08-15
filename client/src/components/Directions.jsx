@@ -5,6 +5,7 @@ import {
   DirectionsRenderer,
   Autocomplete,
 } from "@react-google-maps/api";
+import RouteInstructions from "./RouteInstructions";
 
 class Directions extends Component {
   constructor(props) {
@@ -13,8 +14,10 @@ class Directions extends Component {
     this.state = {
       response: null,
       travelMode: "DRIVING",
-      origin: "",
-      destination: "",
+      origin: "32 Corbett Ave, York, ON M6N 1V1",
+      destination: "269 Conley St, Vaughan, ON L4J 2Z2",
+      routeData: null,
+      routeSteps: [],
       savedRoutes: [],
     };
 
@@ -32,9 +35,11 @@ class Directions extends Component {
   directionsCallback(response) {
     if (response !== null) {
       if (response.status === "OK") {
+        console.log(response);
+        const routeData = response.routes[0];
         this.setState(() => ({
           response,
-          // added resets to break endless api call loop
+          routeData: routeData,
           origin: "",
           destination: "",
         }));
@@ -244,6 +249,7 @@ class Directions extends Component {
               />
             )}
           </GoogleMap>
+          <RouteInstructions routeData={this.state.routeData} />
         </div>
       </div>
     );
