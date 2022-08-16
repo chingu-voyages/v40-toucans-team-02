@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./RouteInstructions.css";
+
 const RouteInstructions = ({ routeData }) => {
   if (!routeData) {
     return <div>Loading...</div>;
@@ -11,7 +13,7 @@ const RouteInstructions = ({ routeData }) => {
   const routeSteps = routeData.legs[0].steps;
 
   return (
-    <div>
+    <div className='instructions-container'>
       <div>
         <h2>Route Instructions</h2>
         <h3>Route Overview</h3>

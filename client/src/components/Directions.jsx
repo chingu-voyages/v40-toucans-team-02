@@ -7,6 +7,8 @@ import {
 } from "@react-google-maps/api";
 import RouteInstructions from "./RouteInstructions";
 
+import "./Directions.css";
+
 class Directions extends Component {
   constructor(props) {
     super(props);
@@ -14,8 +16,8 @@ class Directions extends Component {
     this.state = {
       response: null,
       travelMode: "DRIVING",
-      origin: "32 Corbett Ave, York, ON M6N 1V1",
-      destination: "269 Conley St, Vaughan, ON L4J 2Z2",
+      origin: "240 De Grassi Street, Toronto, ON, Canada",
+      destination: "45 Rockefeller Plaza, New York, NY 10111, United States",
       routeData: null,
       routeSteps: [],
       savedRoutes: [],

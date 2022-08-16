@@ -10,9 +10,6 @@ import MapComponent from "./components/MapComponent";
 
 
 function App() {
-  const padding = {
-    padding: 5,
-  };
   return (
     <Router>
       <div>
