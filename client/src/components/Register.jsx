@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 
 
 
-function SignUp () {
+function Register () {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -88,4 +88,4 @@ function SignUp () {
   );
 }
 
-export default SignUp;
+export default Register;

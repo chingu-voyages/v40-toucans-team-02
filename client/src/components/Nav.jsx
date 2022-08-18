@@ -12,11 +12,11 @@ const Nav = () => {
       <Link style={padding} to="/">
         dashboard
       </Link>
-      <Link style={padding} to="/landing">
-        landing page
+      <Link style={padding} to="/login">
+        login
       </Link>
-      <Link style={padding} to="/signup">
-        signup
+      <Link style={padding} to="/register">
+        register
       </Link>
     </div>
   );

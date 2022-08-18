@@ -1,11 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
-// import LandingPage from "./components/LandingPage";
+import Login from './components/Login';
 
 import MapComponent from "./components/MapComponent";
 import Nav from './components/Nav';
-import SignIn from "./components/SignIn";
+import Register from './components/Register';
 
 function App() {
   return (
@@ -13,8 +12,8 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<MapComponent />} />
-        <Route path="/landing" element={<LandingPage />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
