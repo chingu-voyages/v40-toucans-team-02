@@ -5,7 +5,11 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
+const jwt = require("jsonwebtoken");
+
 const getMapDataRouter = require("./controllers/getMapData");
+const loginRouter = require("./controllers/login");
+const usersRouter = require("./controllers/users");
 
 // MIDDLEWARE
 app.use(morgan("dev"));
@@ -20,10 +24,8 @@ mongoose.connect(config.MONGO_URI, (err) =>
 
 // ROUTES
 app.use("/api", getMapDataRouter);
-
-app.get("*", async (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
+app.use("/users", usersRouter);
+app.use("/login", loginRouter);
 
 app.listen(config.PORT, () =>
   console.log(`Server running on port ${config.PORT}`)
