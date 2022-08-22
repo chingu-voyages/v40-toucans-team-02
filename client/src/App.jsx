@@ -1,10 +1,13 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
-// import LandingPage from "./components/LandingPage";
 
+// import "./App.css";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 import MapComponent from "./components/MapComponent";
-import SignIn from "./components/SignIn";
+
+
 
 function App() {
   const padding = {
@@ -17,16 +20,19 @@ function App() {
           dashboard
         </Link>
         <Link style={padding} to="/landing">
-          landing page
+          profile
         </Link>
-        <Link style={padding} to="/signup">
-          signup
+       
+        <Link style = {padding} to = "/signin">
+          sign in
         </Link>
       </div>
       <Routes>
         <Route path="/" element={<MapComponent />} />
-        <Route path="/landing" element={<LandingPage />} />
-        <Route path="/signin" element={<SignIn />} />
+        {/* <Route path="/landing" element={<Welcome />} /> */}
+        <Route path="/signin" element={<SignUp/>} />
+        <Route path = "/signin" element = {<Login />} />
+
       </Routes>
     </Router>
   );
