@@ -1,19 +1,35 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from './components/Login';
+import "bootstrap/dist/css/bootstrap.min.css"
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
+// import "./App.css";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 import MapComponent from "./components/MapComponent";
-import Nav from './components/Nav';
-import Register from './components/Register';
+
+
 
 function App() {
   return (
     <Router>
-      <Nav />
+      <div>
+        <Link style={padding} to="/">
+          dashboard
+        </Link>
+        <Link style={padding} to="/landing">
+          profile
+        </Link>
+       
+        <Link style = {padding} to = "/signin">
+          sign in
+        </Link>
+      </div>
       <Routes>
         <Route path="/" element={<MapComponent />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/landing" element={<Welcome />} /> */}
+        <Route path="/signin" element={<SignUp/>} />
+        <Route path = "/signin" element = {<Login />} />
+
       </Routes>
     </Router>
   );

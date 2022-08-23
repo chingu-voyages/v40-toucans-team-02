@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-// import "./styles.css";
-
-
-
-
-function Register () {
+function Registration () {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -14,18 +9,21 @@ function Register () {
   // User Login info
   const database = [
     {
-      username: "user1",
-      password: "pass1"
+      username: " ",
+      email:" ",
+      password: " "
     },
     {
-      username: "user2",
-      password: "pass2"
+      username: " ",
+      email:" ",
+      password: " "
     }
   ];
 
   const errors = {
     uname: "invalid username",
-    pass: "invalid password"
+    pass: "invalid password",
+    mail: "must be valid email suffix (e.g. gmail, mac etc.)"
   };
 
   const handleSubmit = (event) => {
@@ -67,6 +65,11 @@ function Register () {
           {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
+          <label>Email</label>
+          <input type="text" name="mail" required />
+          {renderErrorMessage("mail")}
+        </div>
+        <div className="input-container">
           <label>Password </label>
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
@@ -82,10 +85,16 @@ function Register () {
     <div className="app">
       <div className="login-form">
         <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        {isSubmitted ? <div>
+          {/* Need a modal for Checking Email */}
+        </div> : renderForm}
       </div>
     </div>
   );
 }
 
-export default Register;
+export default Registration;
+
+
+
+
