@@ -1,15 +1,17 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-// import "./App.css";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import "./App.css";
+import Auth from "./components/Auth";
 import MapComponent from "./components/MapComponent";
+import { useState } from "react";
 
-
+const padding = {
+  padding: 5,
+};
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   return (
     <Router>
       <div>
@@ -19,17 +21,13 @@ function App() {
         <Link style={padding} to="/landing">
           profile
         </Link>
-       
-        <Link style = {padding} to = "/signin">
-          sign in
+        <Link style={padding} to="/auth">
+          sign up
         </Link>
       </div>
       <Routes>
         <Route path="/" element={<MapComponent />} />
-        {/* <Route path="/landing" element={<Welcome />} /> */}
-        <Route path="/signin" element={<SignUp/>} />
-        <Route path = "/signin" element = {<Login />} />
-
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </Router>
   );
