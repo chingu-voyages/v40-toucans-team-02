@@ -1,17 +1,39 @@
 import React, { useState } from "react";
 import "./Auth.css";
+import loginService from "../services/login";
 
-export default function SignUp(props) {
+const Auth = ({ setIsLoggedIn }) => {
   let [authMode, setAuthMode] = useState("signin");
+  let [username, setUsername] = useState("");
+  let [password, setPassword] = useState("");
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
   };
 
+  const handleSignInClick = async (e) => {
+    e.preventDefault();
+    console.log("sign in");
+    const credentials = {
+      username: username,
+      password: password,
+    };
+    try {
+      const user = await loginService.login(credentials);
+      console.log(user);
+      localStorage.setItem("CommuterPalAuthToken", user.token);
+      setIsLoggedIn(true);
+      setUsername("");
+      setPassword("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (authMode === "signin") {
     return (
       <div className="Auth-form-container">
-        <form className="Auth-form">
+        <form className="Auth-form" onSubmit={handleSignInClick}>
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="text-center">
@@ -21,19 +43,23 @@ export default function SignUp(props) {
               </span>
             </div>
             <div className="form-group mt-3">
-              <label>Email address</label>
+              <label>username</label>
               <input
-                type="email"
+                type="username"
                 className="form-control mt-1"
-                placeholder="Enter email"
+                placeholder="Enter username"
+                value={username}
+                onChange={({ target }) => setUsername(target.value)}
               />
             </div>
             <div className="form-group mt-3">
-              <label>Password</label>
+              <label>password</label>
               <input
                 type="password"
                 className="form-control mt-1"
                 placeholder="Enter password"
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
               />
             </div>
             <div className="d-grid gap-2 mt-3">
@@ -62,15 +88,7 @@ export default function SignUp(props) {
             </span>
           </div>
           <div className="form-group mt-3">
-            <label>Full Name</label>
-            <input
-              type="email"
-              className="form-control mt-1"
-              placeholder="e.g Jane Doe"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Email address</label>
+            <label>email address</label>
             <input
               type="email"
               className="form-control mt-1"
@@ -78,7 +96,15 @@ export default function SignUp(props) {
             />
           </div>
           <div className="form-group mt-3">
-            <label>Password</label>
+            <label>username</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              placeholder="username"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>password</label>
             <input
               type="password"
               className="form-control mt-1"
@@ -90,11 +116,10 @@ export default function SignUp(props) {
               Submit
             </button>
           </div>
-          <p className="text-center mt-2">
-            Forgot <a href="#">password?</a>
-          </p>
         </div>
       </form>
     </div>
   );
-}
+};
+
+export default Auth;
