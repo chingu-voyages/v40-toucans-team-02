@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import loginService from "../services/login";
+import registerService from "../services/register";
 
 const Auth = ({ setIsLoggedIn }) => {
   let [authMode, setAuthMode] = useState("signin");
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
+  let [email, setEmail] = useState("");
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
   };
 
-  const handleSignInClick = async (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
     console.log("sign in");
     const credentials = {
@@ -20,7 +22,6 @@ const Auth = ({ setIsLoggedIn }) => {
     };
     try {
       const user = await loginService.login(credentials);
-      console.log(user);
       localStorage.setItem("CommuterPalAuthToken", user.token);
       setIsLoggedIn(true);
       setUsername("");
@@ -30,10 +31,28 @@ const Auth = ({ setIsLoggedIn }) => {
     }
   };
 
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    console.log("register click");
+    const credentials = {
+      username: username,
+      password: password,
+      email: email,
+    };
+    try {
+      await registerService.register(credentials);
+      setUsername("");
+      setPassword("");
+      setAuthMode("signin");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (authMode === "signin") {
     return (
       <div className="Auth-form-container">
-        <form className="Auth-form" onSubmit={handleSignInClick}>
+        <form className="Auth-form" onSubmit={loginHandler}>
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="text-center">
@@ -78,7 +97,7 @@ const Auth = ({ setIsLoggedIn }) => {
 
   return (
     <div className="Auth-form-container">
-      <form className="Auth-form">
+      <form className="Auth-form" onSubmit={registerHandler}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Create an Account</h3>
           <div className="text-center">
@@ -92,7 +111,9 @@ const Auth = ({ setIsLoggedIn }) => {
             <input
               type="email"
               className="form-control mt-1"
-              placeholder="Email Address"
+              placeholder="email address"
+              value={email}
+              onChange={({ target }) => setEmail(target.value)}
             />
           </div>
           <div className="form-group mt-3">
@@ -101,6 +122,8 @@ const Auth = ({ setIsLoggedIn }) => {
               type="text"
               className="form-control mt-1"
               placeholder="username"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
             />
           </div>
           <div className="form-group mt-3">
@@ -109,6 +132,8 @@ const Auth = ({ setIsLoggedIn }) => {
               type="password"
               className="form-control mt-1"
               placeholder="Password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
             />
           </div>
           <div className="d-grid gap-2 mt-3">
