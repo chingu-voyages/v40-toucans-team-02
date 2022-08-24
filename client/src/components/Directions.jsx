@@ -5,7 +5,6 @@ import {
   DirectionsRenderer,
   Autocomplete,
 } from "@react-google-maps/api";
-import RouteInstructions from "./RouteInstructions";
 
 import "./Directions.css";
 
@@ -16,10 +15,9 @@ class Directions extends Component {
     this.state = {
       response: null,
       travelMode: "DRIVING",
-      origin: "240 De Grassi Street, Toronto, ON, Canada",
-      destination: "45 Rockefeller Plaza, New York, NY 10111, United States",
+      origin: "",
+      destination: "",
       routeData: null,
-      routeSteps: [],
       savedRoutes: [],
     };
 
@@ -37,7 +35,6 @@ class Directions extends Component {
   directionsCallback(response) {
     if (response !== null) {
       if (response.status === "OK") {
-        console.log(response);
         const routeData = response.routes[0];
         this.setState(() => ({
           response,
@@ -97,12 +94,11 @@ class Directions extends Component {
   }
 
   onSaveClick() {
-    // console.log(this);
     if (this.state.response !== null) {
-      // console.log("not null");
+      const destination = this.state.response.request.destination.query;
+      const origin = this.state.response.request.origin.query;
       this.setState(() => {
-        console.log("setState");
-        return this.state.savedRoutes.push(this.state.response);
+        return this.state.savedRoutes.push({ destination, origin });
       });
     }
   }
@@ -247,11 +243,12 @@ class Directions extends Component {
               <DirectionsRenderer
                 options={{
                   directions: this.state.response,
+                  panel: document.getElementById("panel"),
                 }}
               />
             )}
           </GoogleMap>
-          <RouteInstructions routeData={this.state.routeData} />
+          <div id="panel"></div>
         </div>
       </div>
     );
