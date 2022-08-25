@@ -8,6 +8,8 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  background-image: url("../../images/mike-kotsch-03RmsU4i4Ns-unsplash.jpg");
+  background-size: cover;
 }
 
 .Auth-form {

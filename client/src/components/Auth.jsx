@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Auth.css";
 import loginService from "../services/login";
 import registerService from "../services/register";
+import { Button } from "react-bootstrap";
 
 const Auth = ({ setIsLoggedIn }) => {
   let [authMode, setAuthMode] = useState("signin");
@@ -82,7 +83,7 @@ const Auth = ({ setIsLoggedIn }) => {
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary btn-pink">
                 Submit
               </button>
             </div>

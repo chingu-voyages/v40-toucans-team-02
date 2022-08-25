@@ -1,6 +1,8 @@
 import React from "react";
 import MapComponent from "./MapComponent";
 import jwt_decode from "jwt-decode";
+import { Button } from "react-bootstrap";
+import FaveRoutes from './FaveRoutes';
 
 const LandingPage = ({ setIsLoggedIn }) => {
   const authToken = localStorage.getItem("CommuterPalAuthToken");
@@ -13,8 +15,9 @@ const LandingPage = ({ setIsLoggedIn }) => {
   return (
     <div>
       <h1>{`Welcome ${username}`}</h1>
-      <button onClick={handleLogout}>logout</button>
+      <Button var="primary" onClick={handleLogout}>logout</Button>
       <MapComponent />
+      <FaveRoutes />
     </div>
   );
 };
